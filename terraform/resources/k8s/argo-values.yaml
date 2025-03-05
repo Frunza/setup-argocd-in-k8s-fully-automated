@@ -1,0 +1,8 @@
+configs:
+  repositories:
+    - url: git@github.com:Frunza/argo-test.git
+      username: _GIT_USERNAME_
+      password: _GIT_PASSWORD_
+    - url: git@github.com:Frunza/argo-test2.git
+      username: _GIT_USERNAME_
+      password: _GIT_PASSWORD_

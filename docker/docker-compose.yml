@@ -1,0 +1,31 @@
+services:
+  update:
+    image: terraform-cluster-argocd
+    working_dir: /infrastructure
+    environment:
+      - CLUSTER_KUBE_CONFIG=${CLUSTER_KUBE_CONFIG}
+      - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
+      - GIT_USERNAME=${GIT_USERNAME}
+      - GIT_PASSWORD=${GIT_PASSWORD}
+    entrypoint: ["sh", "-c"]
+    command: [
+      "sh createKubeConfig.sh && \ 
+       sh createSSHPrivateKeyFile.sh && \
+       sh updateVariables.sh && \
+       terraform init && terraform validate && terraform apply -auto-approve"
+    ]
+  destroy:
+    image: terraform-cluster-argocd
+    working_dir: /infrastructure
+    environment:
+      - CLUSTER_KUBE_CONFIG=${CLUSTER_KUBE_CONFIG}
+      - SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY}
+      - GIT_USERNAME=${GIT_USERNAME}
+      - GIT_PASSWORD=${GIT_PASSWORD}
+    entrypoint: ["sh", "-c"]
+    command: [
+      "sh createKubeConfig.sh && \ 
+       sh createSSHPrivateKeyFile.sh && \
+       sh updateVariables.sh && \
+       terraform init && terraform validate && terraform destroy -auto-approve"
+    ]
