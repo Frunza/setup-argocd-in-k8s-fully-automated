@@ -65,7 +65,7 @@ echo "$CLUSTER_KUBE_CONFIG" > /infrastructure/.kube/config
 
 To set up `Argo CD` with the desired requirements, we can install it in the cluster via a helm chart and specifying all extra parameters. By providing `Argo CD` version as a parameter, `Terraform` will update `Terraform` whenever the version changes. `Argo CD` access to the desired repositories can be done via *https* or *ssh*. Before this, we want to create a namespace for `Argo CD` via `Terraform` so that the namespace also gets deleted if we destroy the infrastructure.
 
-The `Argo CD` namespace deffinition can be defined as:
+The `Argo CD` namespace definition can be defined as:
 ```sh
 resource "kubernetes_manifest" "argocdNamespace" {
   manifest = {
@@ -112,7 +112,7 @@ sed -i "s/_GIT_USERNAME_/${GIT_USERNAME}/" ./resources/k8s/argo-values.yaml
 sed -i "s/_GIT_PASSWORD_/${GIT_PASSWORD}/" ./resources/k8s/argo-values.yaml
 ```
 
-If we want to provide `Argo CD` access to the desired repositories via *ssh* we need to configure the `Argo CD` values from the `Terraform` cpnfiguration because the replacement handles extra characters better. This could look like:
+If we want to provide `Argo CD` access to the desired repositories via *ssh* we need to configure the `Argo CD` values from the `Terraform` configuration because the replacement handles extra characters better. This could look like:
 ```sh
 variable "sshPrivateKeyFile" {
   description = "Path to the SSH private key file"
@@ -157,7 +157,6 @@ sed -i '2,$s/^/        /' /infrastructure/ssh-private-key.pem
 
 Now we can add an `Argo CD Application` so that it can observe changes from some repositories:
 ```sh
-
 resource "kubernetes_manifest" "argoTestApp" {
   manifest = {
     "apiVersion" = "argoproj.io/v1alpha1"
