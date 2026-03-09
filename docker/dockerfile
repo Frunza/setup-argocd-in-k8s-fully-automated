@@ -1,5 +1,5 @@
 FROM hashicorp/terraform:1.5.0
 
-ADD ./terraform /infrastructure
-ADD ./scripts /infrastructure
+COPY ./terraform /infrastructure
+COPY ./scripts /infrastructure
 WORKDIR /infrastructure
