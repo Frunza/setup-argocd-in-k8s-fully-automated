@@ -108,7 +108,9 @@ configs:
 Now we just have to update the placeholders with the values of environment variables. This can be done in a script:
 ```sh
 sed -i "s/_GIT_USERNAME_/${GIT_USERNAME}/" ./resources/k8s/argo-values.yaml
+echo "Replacement of GIT_USERNAME done"
 sed -i "s/_GIT_PASSWORD_/${GIT_PASSWORD}/" ./resources/k8s/argo-values.yaml
+echo "Replacement of GIT_PASSWORD done"
 ```
 
 If we want to provide `Argo CD` access to the desired repositories via *ssh* we need to configure the `Argo CD` values from the `Terraform` configuration because the replacement handles extra characters better. This could look like:
